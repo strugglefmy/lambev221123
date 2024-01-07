@@ -1,0 +1,542 @@
+4.1
+#include<stdio.h>
+int main()
+{
+int s=1,i,n;
+scanf("%d",&n);
+int a=n;
+	if(n==1)
+    {
+	s=n;
+    }
+    while(n>1){
+    	s=s*n;
+    	n--;
+	} 
+	printf("%d",s);	
+return 0;
+}
+
+4.2
+#include <stdio.h>
+int main(){
+    int num,max,min;
+    scanf("%d",&num);
+    max=min=num;
+    while(getchar()!='\n') {
+        scanf("%d", &num);
+        if (num>max) 
+            max=num;
+        if (num<min) 
+            min=num;
+    }
+    printf("max=%d,min=%d\n",max,min);
+    return 0;
+}
+
+4.3
+#include<bits/stdc++.h>
+#define MAX_CHARS 26
+
+int main() {
+    char text[1000];
+    int count[MAX_CHARS] = {0};
+    int total_chars = 0;
+
+    printf("请输入一段文字（以回车结束）：\n");
+    fgets(text, sizeof(text), stdin);
+    
+    // 统计字母频率
+    for (int i = 0; i < strlen(text); i++) {
+        if (isalpha(text[i])) {
+            count[tolower(text[i]) - 'a']++;
+            total_chars++;
+        }
+    }
+
+    // 输出统计结果
+    printf("字母  频次  百分比  条状图\n");
+    for (int i = 0; i < MAX_CHARS; i++) {
+        if (count[i] > 0) {
+            double percentage = (double) count[i] / total_chars * 100;
+            printf("%c:   %d  %.1f%% ", 'A' + i, count[i], percentage);
+            
+            // 输出条状图
+            for (int j = 0; j < count[i]; j++) {
+                printf("*");
+            }
+            
+            printf("\n");
+        }
+    }
+
+    return 0;
+}
+
+4.4
+#include<bits/stdc++.h>
+int main() {
+    int a=0,b=0;
+	scanf("%d %d",&a,&b);
+	int n=a*b,m=0;
+	while(m=a%b){
+		a=b;
+		b=m;
+	}
+	printf("%d\n",abs(n/b));
+	//辗转相除法求出最大公约数，a*b/最大公约数＝最小公倍数
+    return 0;
+}
+
+4.5
+#include<bits/stdc++.h>
+	struct STU{//名字＋收取不超过十次费用 
+		char name[10];
+		int id;
+		int f1;
+		int f2;
+		int f3;
+		int f4;
+		int f5;
+		int f6;
+		int f7;
+		int f8;
+		int f9;
+		int f10;
+		int fee;
+	}stu1[20];
+	int main(void){
+		int i,n,a[20],k;
+		int x[20];
+		struct STU stu2;
+		scanf("%d",&n);//输入几人 
+		for(i=0;i<n;i++){//第i个人的钱 
+		scanf("%s %d %d %d %d %d",stu1[i].name,&stu1[i].f1 ,&stu1[i].f2,&stu1[i].f3,&stu1[i].f4,&stu1[i].f5,&stu1[i].f6,&stu1[i].f7,&stu1[i].f8,&stu1[i].f9,&stu1[i].f10);
+		//总费用 
+		stu1[i].fee=stu1[i].f1+stu1[i].f2+stu1[i].f3+stu1[i].f4+stu1[i].f5+stu1[i].f6+stu1[i].f7+stu1[i].f8+stu1[i].f9+stu1[i].f10;
+		stu1[i].id=i+1;
+		}
+		for(i=0;i<n-1;i++){
+			k=i;
+		for(int j=i+1;j<n;j++){//同名排在一起 
+			if(a[k]<a[j]){
+			k=j;
+			}
+			if(a[k]=a[j]){
+				if(stu1[k].name==stu1[i].name)
+				k=i;
+			}
+		}
+		if(k!=i){
+			stu2=stu1[k];
+			stu1[k]=stu1[i];
+			stu1[i]=stu2;
+		}
+		}
+		
+		for(i=0;i<n;i++){
+			x[i]=i+1;
+			
+		}
+			for(int j=1;j<n;j++){
+			if(stu1[j].fee==stu1[j-1].fee){
+			x[j]=x[j-1];
+			}
+			}
+
+        for(i=0;i<n;i++){
+			printf("%d %d %s %d",x[i],stu1[i].id,stu1[i].name,stu1[i].fee);
+		    printf("\n");
+		}
+		    return 0;
+	}
+4.6
+#include<bits/stdc++.h>
+void sort(int array[],int l);
+int main() {
+	
+    int n;//3<n<100输入一个整数
+	scanf("%d",&n);
+	int arr[100],i=0,j=0;
+	for(;i<n;i++){
+		scanf("%d",&arr[i]);
+		j+=arr[i];
+	}
+	sort(arr,n);
+	float a,b;//a平均值，b中位数
+	a=(float)j/n;
+	//中位数计算 
+	if(n%2==0){
+		b=(arr[(n/2)-1]+arr[n/2])/2.00;
+	}
+	else{
+		b=arr[n/2];
+	}
+	printf("mean=%.2f,median=%.1f",a,b);
+
+    return 0;
+}
+//sort排序
+void sort(int array[],int l){
+	int q,w,k,t;
+	for(q=0;q<l-1;q++){
+		k=q;
+		for(w=q+1;w<l;w++){
+			if(array[w]<array[k])
+				k=w;
+			t=array[k];
+			array[k]=array[q];
+			array[q]=t;
+		}		
+	}
+}
+
+4.7
+#include<bits/stdc++.h>
+	int main(void){
+		int n,k;
+		int i=0,j=0,a=0,b,sum=0,m;//sum为天才数量
+		scanf("%d %d",&n,&k);//编号 标准 
+		for(i=1;i<=n;i++){
+		m=0;
+		for(j=i;j>=10;){//求位数 
+			a=j%10;m=a+m;j=j/10;
+			
+		}
+		if((i-(m+j))>=k)sum++;//判定是否>标准值 
+		}
+	printf("%d",sum);
+	return 0;
+	}
+
+4.8
+#include<bits/stdc++.h>
+	int main(void){//塞瓦维斯特定律
+	int a,b;
+	scanf("%d %d",&a,&b);
+	printf("%d",(a*b)-a-b);
+	return 0;
+	}
+
+4.9
+#include"bits/INCLUDE.h"
+#include<bits/stdc++.h>
+#pragma comment(linker,"/entry:mainCRTStartup /subsystem:console")
+//先找寻符合条件的"ABC"(AB=AC)再匹配"DEF"
+int main(int argc, char* args) {
+	//函数、结构体定义
+	class Vector {
+	public:
+		int num;
+		int x;
+		int y;
+		double operator*(const Vector& b) { return (this->x * b.x + this->y * b.y); }
+		double Module() { return sqrt(1.0 * this->x * this->x + this->y * this->y); };
+		double operator[](const Vector& b) { return sqrt((this->x - b.x) * (this->x - b.x) + (this->y - b.y) * (this->y - b.y)); }
+	};
+	class Line {
+	public:
+		Vector a;
+		Vector b;
+		operator Vector()const { return { 0,b.x - a.x,b.y - a.y }; }
+		double Angle(const Line& b) {
+			Vector _a = *this, _b = b;
+			return acos((_a * _b) / (_a.Module() * _b.Module()));
+		};
+		static double Angle(const Line& a, const Line& b) {
+			Vector _a = a, _b = b;
+			return acos((_a * _b) / (_a.Module() * _b.Module()));
+		};
+	};
+	double (*calcA)(const Line&, const Line&) = &Line::Angle;
+#define PI 3.141592653
+	//输入
+	std::vector<string> fishes;
+	int count = 0, result = 0;
+	Vector* pts = NULL;
+	STDI >> count;
+	pts = new Vector[count];
+	for (int i = 0; i < count; i++) {
+		(pts + i)->num = i;
+		STDI >> (pts + i)->x >> (pts + i)->y;
+	}
+	//寻找小鱼 所有点轮流当鱼头 即A点
+	for (int i = 0; i < count; i++) {
+		//匹配ABC
+		std::vector<Vector> pairs;
+		int _a = i;
+		Vector& A = *(pts + i);
+		double* distances = new double[count] {0};
+		//计算符合的距离
+		for (int f = 0; f < count; f++)
+			if (f != _a)
+				*(distances + f) = A[*(pts + f)];
+			else
+				*(distances + f) = 0;
+		for (int e = 0; e < count; e++)
+			if (*(distances + e))
+				for (int f = e + 1; f < count; f++)
+					if (*(distances + f) && *(distances + e) == *(distances + f))
+						pairs.push_back({ 0,e,f });
+		memset(distances, 0, count * sizeof(double));
+		//开始匹配DEF
+		//找寻D 满足DB=DC BAD,BDA,CAD,CDA为锐角
+		for (auto& pair : pairs) {
+			std::vector<int> Ds;
+			if (pair.x == pair.y || pair.x == i || pair.y == i)
+				continue;
+			int _b = pair.x, _c = pair.y;
+			if (_b == _a || _c == _a)
+				continue;
+			Vector& B = *(pts + pair.x), & C = *(pts + pair.y);
+			for (int f = 0; f < count; f++) {
+				Vector& temp_D = *(pts + f);
+				if (f == _a || f == _b || f == _c)
+					continue;
+				else
+					if ((*(pts + f))[B] == (*(pts + f))[C] && (calcA({ A,B }, { A,temp_D }) < PI / 2 && calcA({ temp_D,B }, { temp_D,A }) < PI / 2 && calcA({ A,C }, { A,temp_D }) < PI / 2 && calcA({ temp_D,A }, { temp_D ,C }) < PI / 2))
+						Ds.push_back(f);
+			}
+			//寻找EF 满足DE=DF ADE,ADF为钝角
+			for (auto& _d : Ds) {
+				Vector& D = *(pts + _d);
+				std::vector<Vector> efs;
+				for (int f = 0; f < count; f++)
+					if (f != _a && f != _b && f != _c && f != _d)
+						*(distances + f) = D[*(pts + f)];
+					else
+						*(distances + f) = 0;
+				for (int e = 0; e < count; e++)
+					if (*(distances + e))
+						for (int f = e + 1; f < count; f++)
+							if (*(distances + f) && *(distances + e) == *(distances + f))
+								efs.push_back({ 0,e,f });
+				for (auto& ef : efs) {
+					if (ef.x == ef.y || ef.x == i || ef.y == i)
+						continue;
+					int _e = ef.x, _f = ef.y;
+					if (_e == _a || _e == _b || _e == _c || _e == _d)
+						continue;
+					if (_f == _a || _f == _b || _f == _c || _f == _d)
+						continue;
+					Vector& E = *(pts + _e), & F = *(pts + _f);
+					if (calcA({ D,A }, { D,E }) > PI / 2 && calcA({ D,A }, { D,F }) > PI / 2) {
+						Signal flag(4);
+						string f1 = "", f2 = "", f3 = "", f4 = "";
+						//BC DE交换位置 一个匹配的鱼包含4个
+						//ABCDEF
+						f1 += std::to_string(A.num);
+						f1 += std::to_string(B.num);
+						f1 += std::to_string(C.num);
+						f1 += std::to_string(D.num);
+						f1 += std::to_string(E.num);
+						f1 += std::to_string(F.num);
+						//ACBDEF
+						f2 += std::to_string(A.num);
+						f2 += std::to_string(C.num);
+						f2 += std::to_string(B.num);
+						f2 += std::to_string(D.num);
+						f2 += std::to_string(E.num);
+						f2 += std::to_string(F.num);
+						//ABCDFE
+						f3 += std::to_string(A.num);
+						f3 += std::to_string(B.num);
+						f3 += std::to_string(C.num);
+						f3 += std::to_string(D.num);
+						f3 += std::to_string(F.num);
+						f3 += std::to_string(E.num);
+						//ACBDFE
+						f4 += std::to_string(A.num);
+						f4 += std::to_string(C.num);
+						f4 += std::to_string(B.num);
+						f4 += std::to_string(D.num);
+						f4 += std::to_string(F.num);
+						f4 += std::to_string(E.num);
+						//看看是否有重复项
+						for (auto& fish : fishes) {
+							if (StrEquals(fish,f1))
+								flag.Set(0, true);
+							if (StrEquals(fish, f2))
+								flag.Set(1, true);
+							if (StrEquals(fish, f3))
+								flag.Set(2, true);
+							if (StrEquals(fish, f4))
+								flag.Set(3, true);
+						}
+						if (!flag.Get(0))
+							fishes.push_back(f1);
+						if (!flag.Get(1))
+							fishes.push_back(f2);
+						if (!flag.Get(2))
+							fishes.push_back(f3);
+						if (!flag.Get(3))
+							fishes.push_back(f4);
+					}
+					else
+						continue;
+				}
+			}
+		}
+		delete[] distances;
+	}
+	STDO << fishes.size();
+	delete[] pts;
+}
+
+4.10
+#include"bits/INCLUDE.h"
+#include<bits/stdc++.h>
+//使用哈希表、多线程进行搜索
+int main(int argc, char* args) {
+	//初始化线程池 搜索为本为io密集型，但是正文存储于内存中就是仅cpu型
+	//ThreadPool pool(Tools::PoolType::CPUOnly, -1, true);
+	//类、函数声明
+	class File {
+	public:
+		int num;
+		string head;
+		string raw_body;
+		string body;
+		File() :num(0), head(""), body(""), raw_body("") {}
+		File(int n, string h, string b) :num(n), head(h), body(b), raw_body(b) {}
+	};
+	std::map<string, vector<const File*>> dictionary;
+	auto _input = [](string* arr, int index) {
+		char _temp = 0;
+		string temp = "";
+		do {
+			_temp = getchar();
+			if (_temp == '\n' && !temp.size())
+			{
+				_temp = 0;
+				continue;
+			}
+			if (_temp != '\n')
+				temp += _temp;
+		} while (_temp != '\n');
+		*(arr + index) = temp;
+	};
+	auto input = [&dictionary](File* arr, int index) {
+		//先标题 后正文
+		File temp(index, "", "");
+		Signal inputState(2);
+		inputState.Set(0, 1); // 去除首位换行
+		inputState.Set(1, 1); // 正文输入
+		char t = 0;
+		do {
+			t = getchar();
+			if (t == '\n' && inputState.Get(0)) // 去除首位换行
+			{
+				inputState.Set(0, 0);
+				continue;
+			}
+			if (inputState.Get(1)) {
+				if (t == '\n')
+				{
+					inputState.Set(1, 0);
+					continue;
+				}
+				temp.head += t;
+				continue;
+			}
+			if (t != '#')
+				temp.raw_body += t;
+		} while (t != '#');
+		//把换行转为空格，便于操作
+		if (StrEndWith(temp.raw_body, '\n'))
+			temp.raw_body = temp.raw_body.substr(0, temp.raw_body.size() - 1);
+		temp.body = StrReplace(temp.raw_body, '\n', ' ');
+		auto bqs = Split(temp.head, ' ');
+		{
+			auto body_bqs = Split(temp.body, ' ');
+			for (auto& i : body_bqs)
+				bqs.push_back(i);
+		}
+		for (auto& i : bqs) {
+			//删除可能存在的\n和空格
+			i = StrDelete(i, '\n');
+			i = StrDelete(i, ' ');
+			if (dictionary.find(i) == dictionary.end())
+				dictionary[i].push_back(arr + index);
+			else {
+				dictionary.insert(pair<string, vector<const File*>>(i, vector<const File*>()));
+				dictionary[i].push_back(arr + index);
+			}
+		}
+		*(arr + index) = temp;
+	};
+	int count = 0, query_count = 0;
+	File* datas = NULL;
+	//输入
+	STDI >> count;
+	datas = new File[count];
+	for (int i = 0; i < count; i++)
+		input(datas, i);
+	STDI >> query_count;
+	string* queries = new string[query_count]{ "" };
+	for (int i = 0; i < query_count; i++)
+		_input(queries, i);
+	//匹配
+	//先匹配后排序输出
+	auto contains = [](vector<const File*>& arr, const File* target) {
+		if (!arr.size())
+			return false;
+		for (auto& i : arr)
+			if ((void*)i == (void*)target)
+				return true;
+		return false;
+	};
+	auto sorter = [](const File** arr, int count) {
+		for (int loop = 0; loop < count; loop++) {
+			bool changed = false;
+			//这个排序建立在按顺序输入的前提下 如不按顺序输入 则需要比对title的ASCII码值
+			for (int i = 0, f = 1; f < count; i++, f++)
+			{
+				if ((void*)*(arr + i) > (void*)*(arr + f)) {
+					auto temp = *(arr + i);
+					*(arr + i) = *(arr + f);
+					*(arr + f) = temp;
+					changed = true;
+				}
+			}
+			if (!changed)
+				break;
+		}
+	};
+	//TODO:多线程检索
+	for (int i = 0; i < query_count; i++) {
+		string quering = *(queries + i);
+		vector<const File*> _result;
+		auto _bqs = Split(*(queries + i), ' ');
+		for (auto& _bq : _bqs)
+			if (dictionary.find(_bq) != dictionary.end())
+			{
+				for (auto& file : dictionary[_bq])
+					if (!contains(_result, file))
+						_result.push_back(file);
+			}
+		{
+			auto _temp = std::move(_result);
+			_result.clear();
+			for (auto& temp : _temp) {
+				if (!~(temp->head).find(quering) && !~(temp->body).find(quering))
+					continue;
+				else
+					_result.push_back(temp);
+			}
+		}
+		STDO << _result.size() << STDE;
+		if (_result.size()) {
+			const File** result = (const File**)malloc(sizeof(File*) * _result.size());
+			int index = 0;
+			for (auto r : _result)
+				*(result + index++) = r;
+			sorter(result, _result.size());
+			for (int i = 0; i < _result.size(); i++)
+				STDO << (*(result + i))->head << STDE << (*(result + i))->raw_body << STDE;
+		}
+		else
+			STDO << "Not Found" << STDE;
+	}
+	delete[] datas, queries;
+}
